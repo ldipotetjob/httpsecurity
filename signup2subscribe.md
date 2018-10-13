@@ -39,7 +39,7 @@ This will be our workflow:
 2. Token generation for get the token bearer.
 3. Generate the application with the token generated in  the previous step.
 
-We need the steps (1-2) for every process that require **Authorization: Bearer** as is the case of creation of new applications
+We need these steps (1-2) for each process that require **Authorization: Bearer** as is the case of creation of new applications
 
 
 Remenber that for basic authorization whe need encode64 our Authorization parameter at the Header by the way remember that in Authorization: Basic <encode64(userid:password)> and **userid is case sensitive** see Basic and [Digest Access Authentication specefications](https://tools.ietf.org/html/rfc2617#page-5)
