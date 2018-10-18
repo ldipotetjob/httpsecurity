@@ -26,7 +26,9 @@ Some ref. from the API creation process:
 - in the step 5 you have to indicate teh Production and Sandbox urls
 
 So as I mention befor in one step of our API creation process you have to indicate:
+
   Production URL: http://172.17.0.4:9000/apirest 
+  
   Sandbox URL: http://172.17.0.4:9000/apirest
 
 It means that when we make a request to an specific endpoint, WSO2 will addresses to the to **the Production URL** (http://172.17.0.4:9000/apirest)+ the path to our service (/football/matchs). So finally we are talking about context+path that you can find in your restfull definition.(It is independently of your restfull implementation).
