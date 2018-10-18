@@ -37,8 +37,9 @@ If you try to test the aforementioned **Production URL** or **Sandbox URL** most
 
 Thing that we doubts know:
 
-- what files should be saved, WSO2 have a backup implementation?
-- Is not clear if we need to use ENV var in our WSO2 AM, for example when we need to configure our Production URL and our URL is dynamic.
+1. what files should be saved, WSO2 have a backup implementation?
+2. Is not clear if we need to use ENV var in our WSO2 AM, for example when we need to configure our Production URL and our URL is dynamic.
+3. Is possible change the error levels? In docker the container write all levels (warn,info,error) perhaps only ERROR or WARN or any other combinations.
 
 
 
