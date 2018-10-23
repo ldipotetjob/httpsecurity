@@ -31,7 +31,7 @@ So as I mention befor in one step of our API creation process you have to indica
   
   Sandbox URL: http://172.17.0.4:9000/apirest
 
-It means that when we make a request to an specific endpoint, WSO2 will addresses to the to **the Production URL** (http://172.17.0.4:9000/apirest)+ the path to our service (/football/matchs). So finally we are talking about context+path that you can find in your restfull definition.(It is independently of your restfull implementation).
+It means that when we make a request to an specific endpoint, WSO2 will addresses to the to **the Production URL** (http://172.17.0.4:9000/apirest) + the path to our service (/football/matchs). So finally we are talking about context+path that you can find in your restfull definition.(It is independently of your restfull implementation).
 
 If you try to test the aforementioned **Production URL** or **Sandbox URL** most of the time will fail DO NOT feel that someting is wrong and keep goit. In my opinion I think that the Idea of this validation is wrong and most of de developer spent some time trying to understand what did the make wrong and it was nothing.
 
@@ -44,6 +44,7 @@ In the process of clustering api manager, some important info:
 2. H2 database that come with WSO2 is [NOT recommended in production environment](https://docs.wso2.com/display/CLUSTER44x/Setting+up+the+Database). 
 
 
+
  
 
  
@@ -54,7 +55,7 @@ Some queries:
 2. Is not clear if we need to use ENV var in our WSO2 AM, for example when we need to configure our Production URL and our URL is dynamic.
 3. Is possible change the error levels? In docker the container write all levels (warn,info,error) perhaps only ERROR or WARN or any other combinations.
 4. If not possible the use of dns in our address because the user of Hazelcast what happend with all of our dynamic address that we need to use? We need to start our containers every time that other referenced address change.
-
+5. So is not clear in what scenarios is recommended clustering WSO2 product even the images indicating 
 
 
 
