@@ -20,6 +20,7 @@ We will show the basic procedure in which you don't have to worry about where ou
 
 sudo docker run --name wso2test -v wso2scadip:/home/wso2carbon/wso2am-2.6.0/repository wso2/wso2am:2.6.0
 ```
+
 Some ref. from the API creation process:
 [Creating API from scratch](https://docs.wso2.com/display/AM260/Quick+Start+Guide#QuickStartGuide-CreatinganAPIfromscratch):
 - in step 4 you have to indicate the context 
@@ -55,6 +56,14 @@ Some queries:
 4. If not possible the use of dns in our address because the user of Hazelcast what happend with all of our dynamic address that we need to use? We need to start our containers every time that other referenced address change.
 5. So is not clear in what scenarios is recommended clustering WSO2 product even the images indicating 
 
+## Unknown procedures while dockerizing ##
 
+Some of the most important aspect that are no clear when deploy WSO2 in docker container:
+1. How can I modify configuration elements when I run a container from an specficic image ([WSO2 official site](https://hub.docker.com/u/wso2/)). For example how:
 
+   - Change configuration when running docker image?. We create docker container with volumes BUT 
+     in producction environment we need several changes like **H2 DB<=> Postgree/Msql/etc**. Configuring cache and change:
+     <PRODUCT_HOME>/repository/conf/carbon.xml, <API-M_HOME>/repository/conf/api-manager.xml, etc.
+     
+   - 
 
