@@ -62,7 +62,7 @@ Some of the most important aspect that are no clear when deploy WSO2 in docker c
 1. How can I modify configuration elements when I run a container from an specficic image ([WSO2 official site](https://hub.docker.com/u/wso2/)). For example how:
 
    - Change configuration when running docker image?. We create docker container with volumes BUT 
-     in producction environment we need several changes like **H2 DB<=> Postgree/Msql/etc**. Configuring cache and change:
+     in producction environment we need several changes like **H2 DB<=> Postgree/Msql/etc**. [Configuring cache](https://docs.wso2.com/display/AM260/Configuring+Caching) and change:
      <PRODUCT_HOME>/repository/conf/carbon.xml, <API-M_HOME>/repository/conf/api-manager.xml, etc.
      
    - 
