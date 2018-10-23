@@ -35,11 +35,27 @@ It means that when we make a request to an specific endpoint, WSO2 will addresse
 
 If you try to test the aforementioned **Production URL** or **Sandbox URL** most of the time will fail DO NOT feel that someting is wrong and keep goit. In my opinion I think that the Idea of this validation is wrong and most of de developer spent some time trying to understand what did the make wrong and it was nothing.
 
-Thing that we doubts know:
+
+## Clustering ##
+
+In the process of clustering api manager, some important info:
+
+1. [Information related with clustering](https://docs.wso2.com/display/CLUSTER44x/Overview): Curiously the information about the last releases make references to earlier relase. The info is no very clear when they try to separate the 4 components() and [how configure it](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) and prone to errors.
+2. H2 database that come with WSO2 is [NOT recommended in production environment](https://docs.wso2.com/display/CLUSTER44x/Setting+up+the+Database). 
+
+
+ 
+
+ 
+
+Some queries:
 
 1. what files should be saved, WSO2 have a backup implementation?
 2. Is not clear if we need to use ENV var in our WSO2 AM, for example when we need to configure our Production URL and our URL is dynamic.
 3. Is possible change the error levels? In docker the container write all levels (warn,info,error) perhaps only ERROR or WARN or any other combinations.
+4. If not possible the use of dns in our address because the user of Hazelcast what happend with all of our dynamic address that we need to use? We need to start our containers every time that other referenced address change.
+
+
 
 
 
