@@ -42,12 +42,10 @@ In the process of clustering api manager, some important info:
 
 1. [Information related with clustering](https://docs.wso2.com/display/CLUSTER44x/Overview): Curiously the information about the last releases make references to earlier relase. The info is no very clear when they try to separate the 4 components() and [how configure it](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) and prone to errors.
 2. H2 database that come with WSO2 is [NOT recommended in production environment](https://docs.wso2.com/display/CLUSTER44x/Setting+up+the+Database). 
+3. In what escenarios is recommended clustering WSO2 product. What mean the following image in your [clustering documentation page](https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway):
+   ![Load balancer api gateway](NGINXBalancer.png)
 
-
-
- 
-
- 
+What is balancing NGINX in that case, because the element are diferent (manager/worker)
 
 Some queries:
 
