@@ -58,7 +58,7 @@ Some queries:
 
 ## Unknown procedures while dockerizing ##
 
-Some of the most important aspect that are no clear when deploy WSO2 in docker container:
+Some of the most important aspect that are no clear when I deploy WSO2 in docker container:
 
 1. Dealing with the WSO2 configuration when I run a container from ([WSO2 official site](https://hub.docker.com/u/wso2/)):
 
@@ -69,5 +69,6 @@ Some of the most important aspect that are no clear when deploy WSO2 in docker c
      
 2. Architectural patterns: 
    - For apply autoscalling you mean that WSO2AM components must be distributed(clustering) or at least its most critical components(Gateway, Key Manager, Traffic Manager) to allow autoscalling.
-   - In my case I am planning all-in-one deployment, at least for the beginning. So I guess that all-in-deplyment doesn't have any problem when scalling all POD(include several containers).
+   - In my case I am planning all-in-one deployment, at least for the beginning considering a **low traffic requeriment(<1000tps)**(It isn't from your official documentation). So I guess that all-in-deployment doesn't have any problem when scalling all POD(include several containers).In my case I am talking about a container with WSO2AM that will manage Apis that are in other container and of course are externals to your WSO2 platfor.(Not deployed on WSO2 application server)
+
 
