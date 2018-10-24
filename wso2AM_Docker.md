@@ -39,20 +39,18 @@ If you try to test the aforementioned **Production URL** or **Sandbox URL** most
 ## Clustering ##
 Our target is managing APIs publicly exposed to the internet. In the process of clustering api manager, some important info:
 
-1. [Information related with clustering](https://docs.wso2.com/display/CLUSTER44x/Overview): Curiously the information about the last releases make references to earlier relase. The info is no very clear when they try to separate the 4 components() and [how configure it](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) and prone to errors.
+1. [Information related with clustering](https://docs.wso2.com/display/CLUSTER44x/Overview): Curiously the information about the last releases make references to earlier releases. The info is no very clear when they try to separate the 4 components and [how configure it](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) and prone to errors.
 2. H2 database that come with WSO2 is [NOT recommended in production environment](https://docs.wso2.com/display/CLUSTER44x/Setting+up+the+Database). 
 3. In what escenarios is recommended clustering WSO2 product. What does it mean in the following image in your [clustering documentation page](https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway):
    ![Load balancer api gateway](NGINXBalancer.png)
 
-We have a link to a very good article that explain in a very good manner clustering and how make viable scalling. 
+I recommend a very [good article](https://dzone.com/articles/understanding-wso2-api-manager-deployment-patterns-1) that explain in a very good manner clustering and how make viable autoscaling. 
 
 Some queries:
 
 1. what files should be saved, WSO2 have a backup implementation?
-2. Is not clear if we need to use ENV var in our WSO2 AM, for example when we need to configure our Production URL and our URL is dynamic.
-3. Is possible change the error levels? In docker the container write all levels (warn,info,error) perhaps only ERROR or WARN or any other combinations.
-4. If it not possible the use of dns in our address because the user of Hazelcast what happend with all of our dynamic address that we need to use? We need to start our containers every time that any other referenced address change.
-5. So is not clear in what scenarios is recommended clustering WSO2 product even the images indicating 
+2. Is not clear if we need to use ENV var in our WSO2 AM, for example when we need to configure our Production URL and It is dynamic.
+4. If it not possible the use of dns in our address because the use of Hazelcast what happend with all of our dynamic address that we need to use? We need to start our containers every time that any other referenced address change. 
 
 ## Unknown procedures while dockerizing ##
 
@@ -68,6 +66,6 @@ Some of the most important aspect that are no clear when I deploy WSO2 in docker
 2. Architectural patterns: 
    - For apply autoscalling you mean that WSO2AM components must be distributed(clustering) or at least its most critical components(Gateway, Key Manager, Traffic Manager) to allow autoscalling.
    - In my case I am planning all-in-one deployment, at least for the beginning considering a **low traffic requeriment(<1000tps)**(It isn't from your official documentation). So I guess that all-in-deployment doesn't have any problem when scalling all POD(include several containers).In my case I am talking about a container with WSO2AM that will manage Apis that are in other container and of course are externals to your WSO2 platfor.(Not deployed on WSO2 application server)
-   - What is balancing NGINX in that case, because the element are diferent (manager/worker)
+   - It is not clear how make balancing NGINX in WSO2, [because the element are diferent (manager/worker)](https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway). In an **all-in-one deployment** WSO2AM should be in container and external RESTAPI in other container BUT both container in the same POD and our NGINX load balancer in front of the 2 POD replicas.
 
 
