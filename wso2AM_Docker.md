@@ -26,7 +26,7 @@ Some ref. from the API creation process:
 - in step 4 you have to indicate the context 
 - in the step 5 you have to indicate teh Production and Sandbox urls
 
-So as I mention befor in one step of our API creation process you have to indicate:
+So as I mentioned before in one step of our API creation process you have to indicate:
 
   Production URL: http://172.17.0.4:9000/apirest 
   
@@ -38,7 +38,7 @@ If you try to test the aforementioned **Production URL** or **Sandbox URL** most
 
 
 ## Clustering ##
-
+Our target is managing APIs publicly exposed to the internet
 In the process of clustering api manager, some important info:
 
 1. [Information related with clustering](https://docs.wso2.com/display/CLUSTER44x/Overview): Curiously the information about the last releases make references to earlier relase. The info is no very clear when they try to separate the 4 components() and [how configure it](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) and prone to errors.
@@ -53,18 +53,21 @@ Some queries:
 1. what files should be saved, WSO2 have a backup implementation?
 2. Is not clear if we need to use ENV var in our WSO2 AM, for example when we need to configure our Production URL and our URL is dynamic.
 3. Is possible change the error levels? In docker the container write all levels (warn,info,error) perhaps only ERROR or WARN or any other combinations.
-4. If not possible the use of dns in our address because the user of Hazelcast what happend with all of our dynamic address that we need to use? We need to start our containers every time that other referenced address change.
+4. If it not possible the use of dns in our address because the user of Hazelcast what happend with all of our dynamic address that we need to use? We need to start our containers every time that any other referenced address change.
 5. So is not clear in what scenarios is recommended clustering WSO2 product even the images indicating 
 
 ## Unknown procedures while dockerizing ##
 
 Some of the most important aspect that are no clear when deploy WSO2 in docker container:
-1. How can I modify configuration elements when I run a container from an specficic image ([WSO2 official site](https://hub.docker.com/u/wso2/)). For example how:
 
-   - Change configuration when running docker image?. We create docker container with volumes BUT 
-     in producction environment we need several changes like:
+1. Dealing with the WSO2 configuration when I run a container from ([WSO2 official site](https://hub.docker.com/u/wso2/)):
+
+   - We create docker container **with volumes** BUT in producction environment we need several changes like:
        1. databases: **H2 DB => Postgree/Msql/other databases**. 
-       2. [Configuring cache](https://docs.wso2.com/display/AM260/Configuring+Caching) it means modify files: <PRODUCT_HOME>/repository/conf/carbon.xml, <API-M_HOME>/repository/conf/api-manager.xml, etc.
+       2. [Configuring cache](https://docs.wso2.com/display/AM260/Configuring+Caching) it means modify files: <PRODUCT_HOME>/repository/conf/carbon.xml, <API-M_HOME>/repository/conf/api-manager.xml, etc. 
+       So we need to use one of the different ways to provide this file to the container (via short Dockerfile with FROM + COPY, via Docker Configs, via runtime bind-mount, etc) and ***at the same time make the installation on the container trusting that everything is persisted in the created volume and if the container is deleted and we have to create it from the image because we can have this information previously saved and not have to redo the installation of mysql db***
      
-   - 
+2. Architectural patterns: 
+   - For apply autoscalling you mean that WSO2AM components must be distributed(clustering) or at least its most critical components(Gateway, Key Manager, Traffic Manager) to allow autoscalling.
+   - In my case I am planning all-in-one deployment, at least for the beginning. So I guess that all-in-deplyment doesn't have any problem when scalling all POD(include several containers).
 
