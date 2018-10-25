@@ -41,11 +41,37 @@ This will be our workflow:
 
 We need the previous steps (1-2) for each process that require **Authorization: Bearer** as is the case of ***creation of new applications***
 
+1.
 ```sh
 curl -X POST -H "Authorization: Basic ZGFueXlvOkxkZ3RnZXBkejE=" -H "Content-Type: application/json" -d @payload.json http://localhost:9763/client-registration/v0.12/register
 ```
 ref. [@payload.json](payload.json)
 
+response:
+```sh
+{"clientId":"yS0rMBladY2_EJmdY7ltqm5AJEga","clientName":"danyyo_storeuser2","callBackURL":"localhost","clientSecret":"Lb7oXrN9Qr655w70I6hcgvax_o0a","isSaasApplication":true,"appOwner":null,"jsonString":"{\"grant_types\":\"password refresh_token\"}"}
+```
+
+2.
+```sh
+curl -k -d "grant_type=password&username=myusername&password=mypassword&scope=apim:subscribe" -H "Authorization: Basic eVMwck1CbGFkWTJfRUptZFk3bHRTVBSkVnYTpMYjdvWHJOOVFyNjU1dzcwSTZoY2d2YXhfbzBh" https://127.0.0.1:8243/token
+```
+response:
+```sh
+{"access_token":"d05d00c2-ee0e-3f82-9005-69a6a495131e","refresh_token":"bebd7821-a43d-361c-b345-f528853ad775","scope":"apim:subscribe","token_type":"Bearer","expires_in":3600}
+```
 Remenber that for basic authorization whe need encode64, our Authorization parameter at the Header, by the way remember that in Authorization: Basic <encode64(userid:password)> and **userid is case sensitive** see [Basic and Digest Access Authentication specefications](https://tools.ietf.org/html/rfc2617#page-5)
 
-[You can find a reference to process 1-2](https://docs.wso2.com/display/AM210/apidocs/store/index.html#guide)
+You can find a reference to process 1-2 [in this point at the official documentation](https://docs.wso2.com/display/AM210/apidocs/store/index.html#guide)
+
+3.
+```sh
+curl -k -H "Authorization: Bearer d05d00c2-ee0e-3f82-9005-69a6a495131e" -H "Content-Type: application/json" -X POST -d @app.json "https://localhost:9443/api/am/store/v0.12/applications"
+```
+ref. [@papp.json](app.json)
+
+response:
+```sh
+{"applicationId":"569baffe-b860-4887-8847-a552230e4fb8","name":"sampleapp","subscriber":"danyyo","throttlingTier":"Unlimited","callbackUrl":null,"description":"sample app description","status":"APPROVED","groupId":"","keys":[]}
+```
+You can find a reference to process 3 [in this point at the official documentation](https://docs.wso2.com/display/AM210/apidocs/store/index.html#!/operations#ApplicationIndividual#applicationsPost)
