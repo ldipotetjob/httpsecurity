@@ -44,7 +44,7 @@ In the process of clustering api manager, some important points when trying to l
 3. In what escenarios is recommended clustering WSO2 product. What does it mean in the following image in your [clustering documentation page](https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway):
    ![Load balancer api gateway](NGINXBalancer.png)
 
-I recommend a very [good article](https://dzone.com/articles/understanding-wso2-api-manager-deployment-patterns-1) that explain in a very good manner clustering and how make viable autoscaling. 
+I recommend a very [good article](https://dzone.com/articles/understanding-wso2-api-manager-deployment-patterns-1) that explain in a very good manner clustering and how make viable autoscaling in WSO2. 
 
 ### Some queries: ###
 
