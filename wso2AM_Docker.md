@@ -1,5 +1,5 @@
 
-## Dockerizing WSO2 Api Manager ##
+# Dockerizing WSO2 Api Manager #
 
 WSO2 has its [WSO2 docker file documentation](https://docs.wso2.com/display/DF120/WSO2+Dockerfiles+Documentation). I've made a review and I do not like at least for WSO2AM.
 
@@ -32,40 +32,40 @@ So as I mentioned before in one step of our API creation process you have to ind
   
   Sandbox URL: http://172.17.0.4:9000/apirest
 
-It means that when we make a request to an specific endpoint, WSO2 will redirect our request to the to **the Production URL** (http://172.17.0.4:9000/apirest) + the path to our service (/football/matchs). So finally we are talking about the context+path that you can find in your restfull definition.(It is independently of your restfull implementation).
+It means that when we make a request to an specific endpoint, WSO2 will redirect our request to our  **the Production URL** (http://172.17.0.4:9000/apirest) + the path to our service (/football/matchs). So finally we are talking about the context+the path that you can find in your restfull definition(It is independently of your restfull implementation).
 
-If you try to test the aforementioned **Production URL** or **Sandbox URL** most of the time will fail DO NOT feel that someting is wrong and keep goit. In my opinion I think that the Idea of this validation is wrong and too many developers spent some time trying to understand what did they make wrong and it was nothing(referring to external apis). 
+If you try to test the aforementioned **Production URL** or **Sandbox URL** most of the time will fail DO NOT feel that someting is wrong and keep going. In my opinion I think that the Idea of this validation is wrong and too many developers spent some time trying to understand the malfunction (referring to external apis). So my recomendation is that you wait that the creation process finishes and then take a look to curl command that has been generated automatically.
 
 ## Clustering ##
-Our target is managing APIs publicly exposed to the internet. In the process of clustering api manager, some important info:
+In the process of clustering api manager, some important points when trying to look for info:
 
-1. [Information related with clustering](https://docs.wso2.com/display/CLUSTER44x/Overview): Curiously the information about the last releases make references to earlier releases. The info is no very clear when they try to separate the 4 components and [how configure it](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) and prone to errors.
+1. [Information related with clustering](https://docs.wso2.com/display/CLUSTER44x/Overview): Curiously the information about the last releases make references to earlier releases. The info is no very clear when they try to separate the 4 components and the explanation about [how configure them](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) and prone to errors.
 2. H2 database that come with WSO2 is [NOT recommended in production environment](https://docs.wso2.com/display/CLUSTER44x/Setting+up+the+Database). 
 3. In what escenarios is recommended clustering WSO2 product. What does it mean in the following image in your [clustering documentation page](https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway):
    ![Load balancer api gateway](NGINXBalancer.png)
 
 I recommend a very [good article](https://dzone.com/articles/understanding-wso2-api-manager-deployment-patterns-1) that explain in a very good manner clustering and how make viable autoscaling. 
 
-Some queries:
+### Some queries: ###
 
-1. what files should be saved, WSO2 have a backup implementation?
+1. What files should be saved, have WSO2 a backup implementation?
 2. Is not clear if we need to use ENV var in our WSO2 AM, for example when we need to configure our Production URL and It is dynamic.
-4. If it not possible the use of dns in our address because the use of Hazelcast what happend with all of our dynamic address that we need to use? We need to start our containers every time that any other referenced address change. 
+4. If it not possible the use of dns in our address because the use of Hazelcast so what happen with all of our dynamic address that we need to use? Do we need to start our containers every time that any other referenced address change. 
 
 ## Unknown procedures while dockerizing ##
 
-Some of the most important aspect that are no clear when I deploy WSO2 in docker container:
+Some of the most important aspect that are no clear when I deploy WSO2 in a docker container:
 
 1. Dealing with the WSO2 configuration when I run a container from ([WSO2 official site](https://hub.docker.com/u/wso2/)):
 
    - We create docker container **with volumes** BUT in producction environment we need several changes like:
        1. databases: **H2 DB => Postgree/Msql/other databases**. 
        2. [Configuring cache](https://docs.wso2.com/display/AM260/Configuring+Caching) it means modify files: <PRODUCT_HOME>/repository/conf/carbon.xml, <API-M_HOME>/repository/conf/api-manager.xml, etc. 
-       So we need to use one of the different ways to provide this file to the container (via short Dockerfile with FROM + COPY, via Docker Configs, via runtime bind-mount, etc) and ***at the same time make the installation on the container trusting that everything is persisted in the created volume and if the container is deleted and we have to create it from the image because we can have this information previously saved and not have to redo the installation of mysql db***
+       So we need to use one of the different ways to provide this file to the container (via short Dockerfile with FROM + COPY, via Docker Configs, via runtime bind-mount, etc) and ***at the same time we have to make the installation on the container and  trusting that everything is persisted in the created volume. So if the container is deleted and we have to create it from the image again  we can have the information previously saved (mysql installation, user passwords, roles,apis info, etc)***
      
 2. Architectural patterns: 
    - For apply autoscalling you mean that WSO2AM components must be distributed(clustering) or at least its most critical components(Gateway, Key Manager, Traffic Manager) to allow autoscalling.
-   - In my case I am planning all-in-one deployment, at least for the beginning considering a **low traffic requeriment(<1000tps)**(It isn't from your official documentation). So I guess that all-in-deployment doesn't have any problem when scalling all POD(include several containers).In my case I am talking about a container with WSO2AM that will manage Apis that are in other container and of course are externals to your WSO2 platfor.(Not deployed on WSO2 application server)
-   - It is not clear how make balancing NGINX in WSO2, [because the element are diferent (manager/worker)](https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway). In an **all-in-one deployment** WSO2AM should be in container and external RESTAPI in other container BUT both container in the same POD and our NGINX load balancer in front of the 2 POD replicas.
+   - In my case I am planning all-in-one deployment, at least for the beginning considering a **low traffic requeriment(<1000tps)**, it isn't in your official documentation. So I guess that all-in-one deployment doesn't have any problem when scalling all POD(include several containers).In my case I am talking about a container with WSO2AM that will manage Apis that are in other containers and of course are externals to your WSO2 platform(Not deployed on WSO2 application server).
+   - It is not clear how make balancing NGINX in WSO2, [at least in your official explanations (manager/worker)](https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway). In an **all-in-one deployment** WSO2AM should be in container and external RESTAPI in other container BUT both container in the same POD and our NGINX load balancer in front of the 2 POD replicas, for example.
 
 
