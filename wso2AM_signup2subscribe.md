@@ -41,7 +41,7 @@ This will be our workflow:
 
 We need the previous steps (1-2) for each process that require **Authorization: Bearer** as is the case of ***creation of new applications***
 
-1.
+1. Register client
 ```sh
 curl -X POST -H "Authorization: Basic ZGFueXlvOkxkZ3RnZXBkejE=" -H "Content-Type: application/json" -d @payload.json http://localhost:9763/client-registration/v0.12/register
 ```
@@ -52,7 +52,7 @@ response:
 {"clientId":"yS0rMBladY2_EJmdY7ltqm5AJEga","clientName":"danyyo_storeuser2","callBackURL":"localhost","clientSecret":"Lb7oXrN9Qr655w70I6hcgvax_o0a","isSaasApplication":true,"appOwner":null,"jsonString":"{\"grant_types\":\"password refresh_token\"}"}
 ```
 
-2.
+2. Token generation
 ```sh
 curl -k -d "grant_type=password&username=myusername&password=mypassword&scope=apim:subscribe" -H "Authorization: Basic eVMwck1CbGFkWTJfRUptZFk3bHRTVBSkVnYTpMYjdvWHJOOVFyNjU1dzcwSTZoY2d2YXhfbzBh" https://127.0.0.1:8243/token
 ```
@@ -64,7 +64,7 @@ Remenber that for basic authorization whe need encode64, our Authorization param
 
 You can find a reference to process 1-2 [in this point at the official documentation](https://docs.wso2.com/display/AM210/apidocs/store/index.html#guide)
 
-3.
+3. New application
 ```sh
 curl -k -H "Authorization: Bearer d05d00c2-ee0e-3f82-9005-69a6a495131e" -H "Content-Type: application/json" -X POST -d @app.json "https://localhost:9443/api/am/store/v0.12/applications"
 ```
