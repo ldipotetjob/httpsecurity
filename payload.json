@@ -1,0 +1,8 @@
+{
+    "callbackUrl": "localhost",
+    "clientName": "storeuser2",
+    "tokenScope": "Production",
+    "owner": "danyyo",
+    "grantType": "password refresh_token",
+    "saasApp": true
+}
