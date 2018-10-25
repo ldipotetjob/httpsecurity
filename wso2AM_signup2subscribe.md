@@ -33,21 +33,17 @@ The workflow when you create an application in WSO2 is quite different when it i
 
 It not clear in the documentation even though we have a reference that explain [RestFul api for deal with WSO2(https://docs.wso2.com/display/AM210/apidocs/store/index.html).
 
-For create a new application a user will need **to obtain first an Authorization token Bearer** the first thing that the user should has is **Internal/subscriber** role, it used to be default role for every user.
+For create a new application a user will need **to obtain first an Authorization token Bearer** the first thing that the user should has is **Internal/subscriber** role, it use to be default role for every user.
 This will be our workflow:
-1. Client Registration for get the proper pair ***client-id:client secret*** .
+1. Client Registration for get the proper pair  ***client-id:client secret***.
 2. Token generation for get the token bearer.
-3. Generate the application with the token generated in  the previous step.
+3. Generate the application with the token generated in the previous step.
 
 We need the previous steps (1-2) for each process that require **Authorization: Bearer** as is the case of ***creation of new applications***
 
 ```sh
 curl -X POST -H "Authorization: Basic ZGFueXlvOkxkZ3RnZXBkejE=" -H "Content-Type: application/json" -d @payload.json http://localhost:9763/client-registration/v0.12/register
 ```
-Remenber that for basic authorization whe need encode64 our Authorization parameter at the Header by the way remember that in Authorization: Basic <encode64(userid:password)> and **userid is case sensitive** see [Basic and Digest Access Authentication specefications](https://tools.ietf.org/html/rfc2617#page-5)
+Remenber that for basic authorization whe need encode64, our Authorization parameter at the Header, by the way remember that in Authorization: Basic <encode64(userid:password)> and **userid is case sensitive** see [Basic and Digest Access Authentication specefications](https://tools.ietf.org/html/rfc2617#page-5)
 
 [You can find a reference to process 1-2](https://docs.wso2.com/display/AM210/apidocs/store/index.html#guide)
-
-
-
-
