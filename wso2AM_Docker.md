@@ -65,7 +65,8 @@ Some of the most important aspect that are no clear when I deploy WSO2 in a dock
      
 2. Architectural patterns: 
    - For apply autoscalling you mean that WSO2AM components must be distributed(clustering) or at least its most critical components(Gateway, Key Manager, Traffic Manager) to allow autoscalling.
-   - In my case I am planning all-in-one deployment, at least for the beginning considering a **low traffic requeriment(<1000tps)**, it isn't in your official documentation. So I guess that all-in-one deployment doesn't have any problem when scalling all POD(include several containers).In my case I am talking about a container with WSO2AM that will manage Apis that are in other containers and of course are externals to your WSO2 platform(Not deployed on WSO2 application server).
+   - In my case I am planning all-in-one deployment, at least for the beginning considering a **low traffic requeriment(<1000tps)**, it isn't in your official documentation. So I guess that all-in-one deployment doesn't have any problem when scalling all POD(include several containers).In my case I am talking about a container with WSO2AM that will manage Apis that are in other containers and of course are externals to your WSO2 platform(Not deployed on WSO2 application server). see image below 
    - It is not clear how make balancing NGINX in WSO2, [at least in your official explanations (manager/worker)](https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway). In an **all-in-one deployment** WSO2AM should be in container and external RESTAPI in other container BUT both container in the same POD and our NGINX load balancer in front of the 2 POD replicas, for example.
 
+![Load balancer api gateway](NGINXBalancer.png)
 
