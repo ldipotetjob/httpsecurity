@@ -25,15 +25,15 @@ Our goals:
   curl 'http://localhost:9763/store/site/blocks/user/sign-up/ajax/user-add.jag' -H 'Accept: application/json' -d 'action=addUser&username=myusername&password=PyPassword1&allFieldsValues=Kim|Hill|ABC Network|||myemail@mail.com||||'
 ```
  
- [In this website all content is deprecated with the exception of Sign up rest service.](https://docs.wso2.com/display/AM200/Store+APIs#StoreAPIs-UserSignup)
+ [You can find the info about Sign up rest service here take a look that this is the only valid service in this website the rest is deprecated.](https://docs.wso2.com/display/AM200/Store+APIs#StoreAPIs-UserSignup)
   
 ### Add new applications: ###
 
-The workflow when you create an application in WSO2 is quite different when it is done via web console than or when it is done by Restful api.
+The workflow when you create an application in WSO2 is quite different when it is done via web console than when it is done via WSO2 restful api.
 
-It it not clear in the documentation. So we have a reference, there is a document that explain [RestFull api for deal with WSO2](https://docs.wso2.com/display/AM210/apidocs/store/index.html).
+It not clear in the documentation even though we have a reference that explain [RestFul api for deal with WSO2(https://docs.wso2.com/display/AM210/apidocs/store/index.html).
 
-For create a new application a user will need **to obtain first an Authorization token Bearer** the first thing than our user    should has is **Internal/subscriber** role, it used to  be by default.
+For create a new application a user will need **to obtain first an Authorization token Bearer** the first thing that the user should has is **Internal/subscriber** role, it used to be default role for every user.
 This will be our workflow:
 1. Client Registration for get the proper pair ***client-id:client secret*** .
 2. Token generation for get the token bearer.
