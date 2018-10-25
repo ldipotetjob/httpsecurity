@@ -48,7 +48,7 @@ I recommend a very [good article](https://dzone.com/articles/understanding-wso2-
 
 ### Some queries: ###
 
-1. What files should be saved, have WSO2 a backup implementation?
+1. What files/folder should be saved  if we need a WSO2 backup implementation?
 2. Is not clear if we need to use ENV var in our WSO2 AM, for example when we need to configure our Production URL and It is dynamic.
 4. If it not possible the use of dns in our address because the use of Hazelcast so what happen with all of our dynamic address that we need to use? Do we need to start our containers every time that any other referenced address change. 
 
