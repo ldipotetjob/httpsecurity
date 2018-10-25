@@ -1,0 +1,6 @@
+{
+    "throttlingTier": "Unlimited",
+    "description": "sample app description",
+    "name": "sampleapp",
+    "subscriber":"danyyo"
+}
