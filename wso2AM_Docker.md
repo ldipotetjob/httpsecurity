@@ -49,7 +49,7 @@ I recommend a very [good article](https://dzone.com/articles/understanding-wso2-
 ### Some queries: ###
 
 1. What files/folder should be saved  if we need a WSO2 backup implementation?
-2. Is not clear if we need to use ENV var in our WSO2 AM, for example when we need to configure our Production URL and It is dynamic.
+2. Is not clear how deal with ENV var in our WSO2 AM, for example when we need to configure our Production URLs and It are dynamic.
 4. If it not possible the use of dns in our address because the use of Hazelcast so what happen with all of our dynamic address that we need to use? Do we need to start our containers every time that any other referenced address change. 
 
 ## Unknown procedures while dockerizing ##
@@ -64,8 +64,7 @@ Some of the most important aspect that are no clear when I deploy WSO2 in a dock
        So we need to use one of the different ways to provide this file to the container (via short Dockerfile with FROM + COPY, via Docker Configs, via runtime bind-mount, etc) and ***at the same time we have to make the installation on the container and  trusting that everything is persisted in the created volume. So if the container is deleted and we have to create it from the image again  we can have the information previously saved (mysql installation, user passwords, roles,apis info, etc)***
      
 2. Architectural patterns: 
-   - For apply autoscalling you mean that WSO2AM components must be distributed(clustering) or at least its most critical components(Gateway, Key Manager, Traffic Manager) to allow autoscalling.
-   - In my case I am planning all-in-one deployment, at least for the beginning considering a **low traffic requeriment(<1000tps)**, it isn't in your official documentation. So I guess that all-in-one deployment doesn't have any problem when scalling all POD(include several containers).In my case I am talking about a container with WSO2AM that will manage Apis that are in other containers and of course are externals to your WSO2 platform(Not deployed on WSO2 application server). ***see image below with a POD (POD-III Service ApiManagement contains 2 containers(1 for WSO2AM and 1 for the External API))*** 
+   - For apply autoscalling you mean that WSO2AM components must be distributed(clustering) or at least its most critical components(Gateway, Key Manager, Traffic Manager) to allow autoscalling. In my case I am planning all-in-one deployment, at least for the beginning considering a **low traffic requeriment(<1000tps)**, it isn't in your official documentation. So I guess that all-in-one deployment doesn't have any problem when scalling all POD(include several containers).In my case I am talking about a container with WSO2AM that will manage Apis that are in other containers and of course are externals to your WSO2 platform(Not deployed on WSO2 application server). ***see image below with a POD (POD-III Service ApiManagement contains 2 containers(1 for WSO2AM and 1 for the External API))*** 
    - It is not clear how make balancing NGINX in WSO2, [at least in your official explanations (manager/worker)](https://docs.wso2.com/display/CLUSTER44x/Clustering+the+Gateway). In an **all-in-one deployment** WSO2AM should be in container and external RESTAPI in other container BUT both container in the same POD and our NGINX load balancer in front of the 2 POD replicas, for example.
 
 ![WSO2AM prototype with external apis](prototypewso2.png "WSO2AM prototype with external apis")
