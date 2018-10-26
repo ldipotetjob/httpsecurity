@@ -3,7 +3,7 @@
 
 WSO2 has its [WSO2 docker file documentation](https://docs.wso2.com/display/DF120/WSO2+Dockerfiles+Documentation). I've made a review and I do not like at least for WSO2AM.
 
-Any way my first recommendation is ALLWAYS USE OFFICIAL IMAGES of course if it possible. I have test to many images from WSO2 
+Any way my first recommendation is ALLWAYS USE OFFICIAL IMAGES of course if it possible. I have tested to many images from WSO2 
 and the best perfomance is for [WSO2 official site](https://hub.docker.com/u/wso2/).
 
 The problem: **The documentation is minimal or no documentation.**
