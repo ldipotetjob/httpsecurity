@@ -3,10 +3,7 @@
 
 WSO2 has its [WSO2 docker file documentation](https://docs.wso2.com/display/DF120/WSO2+Dockerfiles+Documentation). I've made a review and I do not like at least for WSO2AM.
 
-Any way my first recommendation is ALLWAYS USE OFFICIAL IMAGES of course if it possible. I have tested to many images from WSO2 
-and the best perfomance is for [WSO2 official site](https://hub.docker.com/u/wso2/).
-
-The problem: **The documentation is minimal or no documentation.**
+Any way my first recommendation is ALLWAYS USE OFFICIAL IMAGES of course if it possible. I have tested to many images from WSO2 and the best perfomance is for [WSO2 official site](https://hub.docker.com/u/wso2/).
 
 **In this kind of product is very important to create a container with state, because you will spend too many time in its configuration and could losse sensible info**  
 So before download the image and run it **pay attention in deep** about [how create Volumes](https://docs.docker.com/storage/) in docker:
